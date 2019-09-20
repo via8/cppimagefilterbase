@@ -6,15 +6,13 @@
 //#include <memory>
 #include "stb_image.h"
 
-struct image_data
-{
+struct image_data {
     stbi_uc *pixels;
     int w, h;
     int compPerPixel;
 };
 
-class png_toolkit
-{
+class png_toolkit {
 public:
     enum class Error {
         WrongSize,
