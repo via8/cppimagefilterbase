@@ -7,7 +7,7 @@
 #include "stb_image.h"
 
 struct image_data {
-    stbi_uc *pixels;
+    stbi_uc * pixels;
     int w, h;
     int compPerPixel;
 };
@@ -20,11 +20,11 @@ public:
         Ok
     };
 
-    png_toolkit();
+    //png_toolkit();
     ~png_toolkit();
-    bool load( std::string const &pictureName );
-    bool save( std::string const &pictureName );
-    image_data getPixelData( void ) const;
+    bool load(std::string const & pictureName);
+    bool save(std::string const & pictureName);
+    image_data getPixelData(void) const;
 
 private:
     image_data imgData;
