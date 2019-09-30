@@ -1,4 +1,4 @@
 CMakeLists.txt.user
-out
-.vs
+out/
+.vs/
 CMakeSettings.json
