@@ -5,7 +5,7 @@
 
 class FilterNeighborhood : virtual public Filter {
 private:
-	static std::exception const EXCEPTION_INAPPROPRIATE_DIM;
+	static char const* EXCEPTION_INAPPROPRIATE_DIM;
 
 	// conversion of specified pixel according to it's neighborhood
 	virtual void conversion(stbi_uc const* matrix, stbi_uc* pixel, int compPerPixel, int matrixWidth, int i, int j) const = 0;

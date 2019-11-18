@@ -1,6 +1,7 @@
 #include "FilterNeighborhood.h"
+#include <cstring>
 
-std::exception const FilterNeighborhood::EXCEPTION_INAPPROPRIATE_DIM = std::exception("FilterNeighborhood dimension must be odd natual number >= 3");
+char const* FilterNeighborhood::EXCEPTION_INAPPROPRIATE_DIM = "FilterNeighborhood dimension must be odd natual number >= 3";
 
 FilterNeighborhood::FilterNeighborhood(Configs const& configs, int neighborhoodDim) :
 	Filter(configs),
@@ -35,15 +36,15 @@ void FilterNeighborhood::runFilter(image_data& image, rectangle const& borders) 
 	for (int i = matrixBorders.top, row = 0; i < matrixBorders.bottom; ++i, ++row) {
 		// if vertical size out of image borders then fill whole row of pixels with 0
 		if (row < extraRegionSize || row >= rectangleH + extraRegionSize)
-			std::memset(matrix + row * matrixW * image.compPerPixel, 0, matrixW * pixelSize);
+			memset(matrix + row * matrixW * image.compPerPixel, 0, matrixW * pixelSize);
 		else
 			for (int j = matrixBorders.left, col = 0; j < matrixBorders.right; ++j, ++col) {
 				// if horizontal size out of image borders then fill current pixel with 0
 				if (col < extraRegionSize || col >= rectangleW + extraRegionSize)
-					std::memset(matrix + (row * matrixW + col) * image.compPerPixel, 0, pixelSize);
+					memset(matrix + (row * matrixW + col) * image.compPerPixel, 0, pixelSize);
 				// else copy initial pixel
 				else
-					std::memcpy(matrix + (row * matrixW + col) * image.compPerPixel,
+					memcpy(matrix + (row * matrixW + col) * image.compPerPixel,
 						image.pixels + (i * image.w + j) * image.compPerPixel, pixelSize);
 			}
 	}

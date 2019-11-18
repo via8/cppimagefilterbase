@@ -1,9 +1,9 @@
 #include "Filter.h"
 
-std::exception const Filter::EXCEPTION_INAPPROPRIATE_IMAGE = std::exception("Inappropriate image data");
+char const* Filter::EXCEPTION_INAPPROPRIATE_IMAGE = "Inappropriate image data";
 
 void Filter::processPNG(image_data& image) const {
-	if (image.pixels == nullptr ||
+	if (image.pixels == NULL ||
 		image.h <= 0 ||
 		image.w <= 0 ||
 		image.compPerPixel < RGBcomp ||

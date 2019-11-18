@@ -5,8 +5,8 @@
 
 class FilterThreshold2 : public FilterIntensity {
 private:
-	static std::exception const EXCEPTION_INAPPROPRIATE_DIM;
-	static std::exception const EXCEPTION_RUNTIME_ALLOCATION;
+	static char const* EXCEPTION_INAPPROPRIATE_DIM;
+	static char const* EXCEPTION_RUNTIME_ALLOCATION;
 
 	int squareDim;
 

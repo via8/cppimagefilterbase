@@ -1,8 +1,9 @@
 #include "FilterThreshold2.h"
 #include <algorithm>
+#include <cstring>
 
-std::exception const FilterThreshold2::EXCEPTION_INAPPROPRIATE_DIM  = std::exception("FilterNeighborhood dimension must be odd natual number >= 3");
-std::exception const FilterThreshold2::EXCEPTION_RUNTIME_ALLOCATION = std::exception("Another square size non-positive value. Unknown error.");
+char const* FilterThreshold2::EXCEPTION_INAPPROPRIATE_DIM  = "FilterNeighborhood dimension must be odd natual number >= 3";
+char const* FilterThreshold2::EXCEPTION_RUNTIME_ALLOCATION = "Another square size non-positive value. Unknown error.";
 
 FilterThreshold2::FilterThreshold2(Configs const& configs) :
 	Filter(configs),
@@ -13,10 +14,10 @@ FilterThreshold2::FilterThreshold2(Configs const& configs) :
 void FilterThreshold2::threshold(stbi_uc const* matrix, stbi_uc* pixel, int compPerPixel, int matrixWidth, int i, int j, rectangle const& squareBorders) const {
 	// initialize vector of current square intensities
 	int squareSize = (squareBorders.bottom - squareBorders.top) * (squareBorders.right - squareBorders.left);
-	
+
 	if (squareSize <= 0)
 		throw FilterThreshold2::EXCEPTION_RUNTIME_ALLOCATION;
-	
+
 	stbi_uc* square = new stbi_uc[squareSize];
 
 	// fill vector with intensities
@@ -51,7 +52,7 @@ void FilterThreshold2::runFilter(image_data& image, rectangle const& borders) co
 	// fill initial matrix of pixels
 	for (int i = borders.top, row = 0; i < borders.bottom; ++i, ++row) {
 		for (int j = borders.left, col = 0; j < borders.right; ++j, ++col) {
-			std::memcpy(matrix + (row * rectangleW + col) * image.compPerPixel,
+			memcpy(matrix + (row * rectangleW + col) * image.compPerPixel,
 						image.pixels + (i * image.w + j) * image.compPerPixel, pixelSize);
 		}
 	}

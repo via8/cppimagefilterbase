@@ -12,7 +12,7 @@
 int main(int argc, char * argv[]) {
     try {
         if (argc != 4)
-            throw std::exception("Not enough arguments");
+            throw "Not enough arguments";
 
 		Configs configs(argv[1]);
 
@@ -43,8 +43,8 @@ int main(int argc, char * argv[]) {
 			studTool.save(argv[3]);
 		}
 
-    } catch (std::exception exception) {
-        std::cout << "Error: " << exception.what() << std::endl;
+    } catch (char const* err) {
+        std::cout << "Error: " << err << std::endl;
         return 1;
     }
 

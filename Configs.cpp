@@ -7,11 +7,11 @@ char const* Configs::filterTypes[] = {
     "Edge",
     "Threshold"
 };
-std::exception const Configs::EXCEPTION_UNABLE_OPEN_FILE = std::exception("Unable to open file");
-std::exception const Configs::EXCEPTION_INVALID_CONFIG	 = std::exception("Invalid config's file content");
-std::exception const Configs::EXCEPTION_UNKNOWN_FILTER   = std::exception("Unknown filter type name");
-std::exception const Configs::EXCEPTION_NEGATIVE_BORDER  = std::exception("Negative border values are not allowed");
-std::exception const Configs::EXCEPTION_INVALID_BORDERS  = std::exception("Invalid borders of rectangle specified");
+char const* Configs::EXCEPTION_UNABLE_OPEN_FILE = "Unable to open file";
+char const* Configs::EXCEPTION_INVALID_CONFIG	= "Invalid config's file content";
+char const* Configs::EXCEPTION_UNKNOWN_FILTER   = "Unknown filter type name";
+char const* Configs::EXCEPTION_NEGATIVE_BORDER  = "Negative border values are not allowed";
+char const* Configs::EXCEPTION_INVALID_BORDERS  = "Invalid borders of rectangle specified";
 
 void Configs::setFilterType(std::string filterTypeName) {
 	int filtersQuantity = sizeof(filterTypes) / sizeof(char*);
@@ -52,7 +52,7 @@ Configs::Configs(char const* configFilename) :
 		borders.right  < 0)
 		throw Configs::EXCEPTION_NEGATIVE_BORDER;
 
-	// if values are not 0 we get rectangle with integer division 
+	// if values are not 0 we get rectangle with integer division
 	// of image width/height by borders fields
 	if ((borders.top  != 0 && borders.top  < borders.bottom) ||
 		(borders.left != 0 && borders.left < borders.right))

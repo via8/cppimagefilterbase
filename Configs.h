@@ -2,7 +2,6 @@
 #define CONFIGS_H
 
 #include <string>
-#include <exception>
 
 enum FilterType {
 	RED		  = 0,
@@ -15,11 +14,11 @@ enum FilterType {
 class Configs {
 private:
 	static char const* filterTypes[];
-	static std::exception const EXCEPTION_UNABLE_OPEN_FILE;
-	static std::exception const EXCEPTION_INVALID_CONFIG;
-	static std::exception const EXCEPTION_UNKNOWN_FILTER;
-	static std::exception const EXCEPTION_NEGATIVE_BORDER;
-	static std::exception const EXCEPTION_INVALID_BORDERS;
+	static char const* EXCEPTION_UNABLE_OPEN_FILE;
+	static char const* EXCEPTION_INVALID_CONFIG;
+	static char const* EXCEPTION_UNKNOWN_FILTER;
+	static char const* EXCEPTION_NEGATIVE_BORDER;
+	static char const* EXCEPTION_INVALID_BORDERS;
 
 	int filterType;
 	struct {

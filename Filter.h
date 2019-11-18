@@ -1,7 +1,7 @@
 #ifndef FILTER_H
 #define FILTER_H
 
-#include <exception>
+#include <iostream>
 #include "Configs.h"
 #include "png_toolkit.h"
 
@@ -14,7 +14,7 @@ struct rectangle {
 
 class Filter {
 private:
-	static std::exception const EXCEPTION_INAPPROPRIATE_IMAGE;
+	static char const* EXCEPTION_INAPPROPRIATE_IMAGE;
 
 	int const RGBcomp  = 3;		// RGB  channels
 	int const RGBAcomp = 4;		// RGBA channels
