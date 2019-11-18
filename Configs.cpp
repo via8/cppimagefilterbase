@@ -7,7 +7,6 @@ char const* Configs::filterTypes[] = {
     "Edge",
     "Threshold"
 };
-char const* Configs::EXCEPTION_UNABLE_OPEN_FILE = "Unable to open file";
 char const* Configs::EXCEPTION_INVALID_CONFIG	= "Invalid config's file content";
 char const* Configs::EXCEPTION_UNKNOWN_FILTER   = "Unknown filter type name";
 char const* Configs::EXCEPTION_NEGATIVE_BORDER  = "Negative border values are not allowed";
@@ -23,25 +22,20 @@ void Configs::setFilterType(std::string filterTypeName) {
 		}
 }
 
-Configs::Configs(char const* configFilename) :
+Configs::Configs(std::ifstream& configFile) :
     filterType(FilterType::UNKNOWN),
     borders{0,0,0,0} {
-	std::ifstream configFile;
-	configFile.open(configFilename, std::ifstream::in);
-
-	if (!configFile.is_open())
-		throw Configs::EXCEPTION_UNABLE_OPEN_FILE;
 
 	std::string filterTypeName;
-	if (!(configFile >> filterTypeName) ||
-		!(configFile >> borders.top)	||
+	if (!(configFile >> filterTypeName))
+		return;
+
+	if (!(configFile >> borders.top)	||
 		!(configFile >> borders.left)	||
 		!(configFile >> borders.bottom) ||
 		!(configFile >> borders.right))
 		throw Configs::EXCEPTION_INVALID_CONFIG;
-
-	configFile.close();
-
+	
 	setFilterType(filterTypeName);
 	if (filterType == FilterType::UNKNOWN)
 		throw Configs::EXCEPTION_UNKNOWN_FILTER;

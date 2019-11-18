@@ -14,7 +14,6 @@ enum FilterType {
 class Configs {
 private:
 	static char const* filterTypes[];
-	static char const* EXCEPTION_UNABLE_OPEN_FILE;
 	static char const* EXCEPTION_INVALID_CONFIG;
 	static char const* EXCEPTION_UNKNOWN_FILTER;
 	static char const* EXCEPTION_NEGATIVE_BORDER;
@@ -31,7 +30,7 @@ private:
 	void setFilterType(std::string filterTypeName);
 
 public:
-	explicit Configs(char const* configFilename);
+	explicit Configs(std::ifstream& configFile);
 	int getFilterType()   const { return filterType; }
 	int getTopBorder()    const { return borders.top; }
 	int getBottomBorder() const { return borders.bottom; }
