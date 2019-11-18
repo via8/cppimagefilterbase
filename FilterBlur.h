@@ -5,7 +5,7 @@
 
 class FilterBlur : public FilterNeighborhood {
 private:
-	// blur normalization divider for conversion process
+	// convolution normalization divider for conversion process
 	int const normalizationDivider;
 
 	void conversion(stbi_uc const* matrix, stbi_uc* pixel, int compPerPixel, int matrixWidth, int i, int j) const;

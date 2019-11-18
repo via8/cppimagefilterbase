@@ -5,36 +5,31 @@ FilterEdge::FilterEdge(Configs const& configs) :
 	FilterIntensity(configs),
 	FilterNeighborhood(configs, 3),
 	centerMultiplier(neighborhoodDim * neighborhoodDim),
-	edgeMultiplier(-1) {}
+	edgeMultiplier(-1),
+	normalizationDivider(neighborhoodDim * neighborhoodDim) {}
 
 void FilterEdge::conversion(stbi_uc const* matrix, stbi_uc* pixel, int compPerPixel, int matrixWidth, int i, int j) const {
-	// initialize new values of channels with 0
-	int compR = 0;
-	int compG = 0;
-	int compB = 0;
+	// initialize initial intensity value with 0
+	int intensity = 0;
 
 	// start calculation of conversion value for each channel
 	for (int row = -extraRegionSize; row <= extraRegionSize; ++row) {
 		for (int col = -extraRegionSize; col <= extraRegionSize; ++col) {
 			int shift = ((i + extraRegionSize + row) * matrixWidth + (j + extraRegionSize + col)) * compPerPixel;
 			if (row == 0 && col == 0) {
-				compR += (matrix + shift)[R] * centerMultiplier;
-				compG += (matrix + shift)[G] * centerMultiplier;
-				compB += (matrix + shift)[B] * centerMultiplier;
+				intensity += (matrix + shift)[R] * centerMultiplier;
 			}
 			else {
-				compR += (matrix + shift)[R] * edgeMultiplier;
-				compG += (matrix + shift)[G] * edgeMultiplier;
-				compB += (matrix + shift)[B] * edgeMultiplier;
+				intensity += (matrix + shift)[R] * edgeMultiplier;
 			}
 		}
 	}
 
-	// get stbi_uc values
+	intensity /= normalizationDivider;
+
+	// get stbi_uc value
 	// TODO: replace magic number 255
-	pixel[R] = (compR > 255) ? 255 : ((compR < 0) ? 0 : (stbi_uc)compR);
-	pixel[G] = (compR > 255) ? 255 : ((compG < 0) ? 0 : (stbi_uc)compG);
-	pixel[B] = (compR > 255) ? 255 : ((compB < 0) ? 0 : (stbi_uc)compB);
+	pixel[R] = pixel[G] = pixel[B] = (intensity > 255) ? 255 : ((intensity < 0) ? 0 : (stbi_uc)intensity);
 }
 
 void FilterEdge::runFilter(image_data& image, rectangle const& borders) const {
