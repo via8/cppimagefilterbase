@@ -20,7 +20,7 @@ public:
         Ok
     };
 
-    //png_toolkit();
+    png_toolkit();
     ~png_toolkit();
     bool load(std::string const & pictureName);
     bool save(std::string const & pictureName);
