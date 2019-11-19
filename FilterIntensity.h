@@ -5,9 +5,10 @@
 
 class FilterIntensity : virtual public Filter {
 private:
-	//float intensityProportionR = 0.3f;
-	//float intensityProportionG = 0.6f;
-	//float intensityProportionB = 0.1f;
+	int intensityCoeffR = 3;
+	int intensityCoeffG = 6;
+	int intensityCoeffB = 1;
+	int normalizationCoeff = 10;
 
 protected:
 	void runFilter(image_data& image, rectangle const& borders) const;
