@@ -5,8 +5,7 @@ FilterEdge::FilterEdge(Configs const& configs) :
 	FilterIntensity(configs),
 	FilterNeighborhood(configs, 3),
 	centerMultiplier(neighborhoodDim * neighborhoodDim),
-	edgeMultiplier(-1),
-	normalizationDivider(neighborhoodDim * neighborhoodDim) {}
+	edgeMultiplier(-1) {}
 
 void FilterEdge::conversion(stbi_uc const* matrix, stbi_uc* pixel, int compPerPixel, int matrixWidth, int i, int j) const {
 	// initialize initial intensity value with 0
@@ -24,8 +23,6 @@ void FilterEdge::conversion(stbi_uc const* matrix, stbi_uc* pixel, int compPerPi
 			}
 		}
 	}
-
-	intensity /= normalizationDivider;
 
 	// get stbi_uc value
 	// TODO: replace magic number 255

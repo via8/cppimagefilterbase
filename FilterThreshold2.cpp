@@ -31,7 +31,7 @@ void FilterThreshold2::threshold(stbi_uc const* matrix, stbi_uc* pixel, int comp
 	std::sort(square, square + squareSize);
 
 	// threshold process: compare current pixel intensity with median value of the square
-	if (pixel[R] <= square[squareSize / 2])
+	if (pixel[R] < square[squareSize / 2])
 		pixel[R] = pixel[G] = pixel[B] = 0x0;
 
 	delete[] square;
