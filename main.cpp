@@ -48,6 +48,7 @@ int main(int argc, char * argv[]) {
 			if (filter != nullptr) {
 				image_data image = studTool.getPixelData();
 				filter->processPNG(image);
+				delete filter;
 			}
 		}
 
